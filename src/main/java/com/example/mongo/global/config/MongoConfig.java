@@ -1,10 +1,10 @@
 package com.example.mongo.global.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 @Configuration
-@EnableMongoRepositories
+@EnableMongoAuditing
 public class MongoConfig {
 
 }

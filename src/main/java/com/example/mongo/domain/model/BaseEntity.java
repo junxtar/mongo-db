@@ -2,9 +2,7 @@ package com.example.mongo.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,9 +15,9 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "create_at", updatable = false)
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     @LastModifiedDate
     @Column(name="modified_at")
-    private LocalDateTime modifiedAt;
+    private String modifiedAt;
 }

@@ -10,5 +10,6 @@ public class ChatCreateReq {
 
     private Long sender;
     private String message;
+    private Boolean isDeleted;
 
 }

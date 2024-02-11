@@ -10,19 +10,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChatCreateRes {
 
+    private String id;
     private Long sender;
     private String message;
+    private Boolean isDeleted;
 
     @Builder
-    private ChatCreateRes(Long sender, String message) {
+    private ChatCreateRes(String id, Long sender, String message, Boolean isDeleted) {
+        this.id = id;
         this.sender = sender;
         this.message = message;
+        this.isDeleted = isDeleted;
     }
 
     public static ChatCreateRes to(Chat chat) {
         return ChatCreateRes.builder()
+            .id(chat.getId())
             .sender(chat.getSender())
             .message(chat.getMessage())
+            .isDeleted(chat.getIsDeleted())
             .build();
     }
 }

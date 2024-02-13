@@ -3,8 +3,10 @@ package com.example.mongo.domain.chat.service;
 import com.example.mongo.domain.chat.dto.request.ChatCreateReq;
 import com.example.mongo.domain.chat.dto.response.ChatCreateRes;
 import com.example.mongo.domain.chat.entity.Chat;
+import com.example.mongo.domain.chat.event.ChatEvent;
 import com.example.mongo.domain.chat.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ChatService {
 
+    private final ApplicationEventPublisher publisher;
     private final ChatRepository chatRepository;
 
     public ChatCreateRes getChat(String chatId) {
@@ -28,6 +31,12 @@ public class ChatService {
             .build();
         Chat saveChat = chatRepository.save(chat);
 
+        ChatEvent chatEvent = ChatEvent.builder().senderId(saveChat.getSender())
+            .message(saveChat.getMessage())
+            .build();
+
+        publisher.publishEvent(chatEvent);
+
         return ChatCreateRes.to(saveChat);
     }
 
@@ -35,6 +44,7 @@ public class ChatService {
     public ChatCreateRes updateChat(String chatId) {
         Chat chat = chatRepository.findById(chatId).get();
         chat.updateDeleted();
+        long a = 1/0;
         return ChatCreateRes.to(chat);
     }
 

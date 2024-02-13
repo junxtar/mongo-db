@@ -5,6 +5,7 @@ import com.example.mongo.domain.chat.dto.response.ChatCreateRes;
 import com.example.mongo.domain.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,5 +32,11 @@ public class ChatController {
     @PutMapping("/{chatId}")
     public ResponseEntity<ChatCreateRes> updateChat(@PathVariable String chatId) {
         return ResponseEntity.ok(chatService.updateChat(chatId));
+    }
+
+    @DeleteMapping("/{chatId}")
+    public ResponseEntity<Void> deleteChat(@PathVariable String chatId) {
+        chatService.deleteChat(chatId);
+        return ResponseEntity.noContent().build();
     }
 }

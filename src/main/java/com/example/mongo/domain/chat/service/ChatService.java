@@ -37,4 +37,9 @@ public class ChatService {
         chat.updateDeleted();
         return ChatCreateRes.to(chat);
     }
+
+    public void deleteChat(String chatId) {
+        Chat chat = chatRepository.findById(chatId).get();
+        chatRepository.delete(chat);
+    }
 }

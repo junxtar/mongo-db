@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "chat")
+@Document("chat")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Chat {

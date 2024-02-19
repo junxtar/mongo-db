@@ -1,28 +1,23 @@
 package com.example.mongo.domain.chat.entity;
 
-import jakarta.persistence.Column;
+import com.example.mongo.domain.model.MongoBaseEntity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("chat")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Chat {
+public class Chat extends MongoBaseEntity {
 
     @Id
     private String id;
     private Long sender;
     private String message;
     private Boolean isDeleted;
-
-    @CreatedDate
-    @Column(updatable = false, name = "created_at")
-    private String createdAt;
 
     @Builder
     private Chat(Long sender, String message, Boolean isDeleted) {

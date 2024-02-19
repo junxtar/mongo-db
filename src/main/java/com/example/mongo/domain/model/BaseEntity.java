@@ -1,22 +1,23 @@
 package com.example.mongo.domain.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
-import java.io.Serializable;
-import java.time.ZonedDateTime;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @MappedSuperclass
-public abstract class MongoBaseTimeEntity implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseEntity {
 
     @CreatedDate
-    @Field(name = "create_at")
-    private String createdAt = ZonedDateTime.now().toString();
+    @Column(name = "create_at", updatable = false)
+    private String createdAt;
 
     @LastModifiedDate
-    @Field(name="modified_at")
-    private String modifiedAt = ZonedDateTime.now().toString();
+    @Column(name="modified_at")
+    private String modifiedAt;
 }
